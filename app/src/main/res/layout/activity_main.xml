@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAF7FB">
+
+    <!-- ===== TIÊU ĐỀ ===== -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lịch theo tuần"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="14dp"
+        android:textColor="#000000"/>
+
+    <!-- ===== CHỌN NGÀY ===== -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <EditText
+            android:id="@+id/edtDate"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_input"
+            android:paddingStart="12dp"
+            android:gravity="center_vertical"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:inputType="none"
+            android:textColor="#333"/>
+
+        <ImageButton
+            android:id="@+id/btnPickDate"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_input"
+            android:src="@android:drawable/ic_menu_my_calendar"
+            android:contentDescription="Pick date"/>
+    </LinearLayout>
+
+    <!-- ===== NÚT TẠO SỰ KIỆN ===== -->
+    <Button
+        android:id="@+id/btnAddEvent"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Tạo sự kiện"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_button_primary"
+        android:textColor="@android:color/white"/>
+
+    <!-- ===== SCROLL NGANG CHỨA BẢNG ===== -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <!-- ===== SCROLL DỌC ===== -->
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <!-- 🔥 INCLUDE BẢNG LỊCH -->
+            <include
+                android:id="@+id/weekCalendar"
+                layout="@layout/view_week_calendar"/>
+
+        </ScrollView>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
