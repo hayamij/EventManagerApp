@@ -1,6 +1,7 @@
 package com.example.eventmanagerapp.presentation;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,7 +22,7 @@ import com.example.eventmanagerapp.R;
 import com.example.eventmanagerapp.domain.model.Event;
 import com.example.eventmanagerapp.domain.usecase.GetEventsUseCase;
 import com.example.eventmanagerapp.presentation.auth.LoginActivity;
-import com.example.eventmanagerapp.ui.EventAdapter;
+import com.example.eventmanagerapp.adapter.EventAdapter;
 import com.example.eventmanagerapp.utils.AlarmScheduler;
 import com.example.eventmanagerapp.utils.DateTimeHelper;
 import com.example.eventmanagerapp.utils.SessionManager;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Views
     private EditText edtDate;
-    private ImageButton btnPickDate;
+    private ImageButton btnPickDate, btnLogout;
     private Button btnAddEvent;
 
     private TextView[] headerDays = new TextView[7];
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     // Use Case & Utils
     private GetEventsUseCase getEventsUseCase;
     private AlarmScheduler alarmScheduler;
+    private SessionManager sessionManager;
 
     private static final int REQUEST_NOTIFICATION_PERMISSION = 1001;
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SessionManager sessionManager = new SessionManager(this);
+        sessionManager = new SessionManager(this);
         if (!sessionManager.isLoggedIn()) {
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         edtDate = findViewById(R.id.edtDate);
         btnPickDate = findViewById(R.id.btnPickDate);
         btnAddEvent = findViewById(R.id.btnAddEvent);
+        btnLogout = findViewById(R.id.btnLogout);
 
         bindWeekCalendarViews();
     }
@@ -159,6 +162,35 @@ public class MainActivity extends AppCompatActivity {
             String dateTag = DateTimeHelper.formatTagDate(selectedDate);
             checkPermissionAndOpenAddEvent(dateTag);
         });
+
+        // ✅ Thêm listener cho nút đăng xuất
+        btnLogout.setOnClickListener(v -> showLogoutDialog());
+    }
+
+    /**
+     * ✅ Hiển thị dialog xác nhận đăng xuất
+     */
+    private void showLogoutDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Đăng xuất")
+                .setMessage("Bạn có chắc muốn đăng xuất?")
+                .setPositiveButton("Đăng xuất", (dialog, which) -> performLogout())
+                .setNegativeButton("Hủy", null)
+                .show();
+    }
+
+    /**
+     * ✅ Thực hiện đăng xuất
+     */
+    private void performLogout() {
+        sessionManager.logout();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+
+        Toast.makeText(this, "Đã đăng xuất", Toast.LENGTH_SHORT).show();
     }
 
     private void openDatePicker() {

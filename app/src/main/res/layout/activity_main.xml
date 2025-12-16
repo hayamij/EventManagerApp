@@ -6,15 +6,36 @@
     android:background="#FAF7FB">
 
     <!-- ===== TIÊU ĐỀ ===== -->
-    <TextView
+    <!-- ===== HEADER VỚI NÚT ĐĂNG XUẤT ===== -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lịch theo tuần"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="14dp"
-        android:textColor="#000000"/>
+        android:padding="14dp">
+
+        <!-- Nút đăng xuất ở góc trái -->
+        <ImageButton
+            android:id="@+id/btnLogout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_input"
+            android:src="@android:drawable/ic_lock_power_off"
+            android:contentDescription="Đăng xuất"
+            android:scaleType="centerInside"
+            android:padding="8dp"/>
+
+        <!-- Tiêu đề ở giữa -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Lịch theo tuần"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+    </RelativeLayout>
 
     <!-- ===== CHỌN NGÀY ===== -->
     <LinearLayout

@@ -4,7 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    android:background="@android:color/white">
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_event_card"
+    android:clickable="true"
+    android:focusable="true">
 
     <!-- Tiêu đề sự kiện -->
     <TextView
@@ -12,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event title"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black" />
+        android:textColor="#111111" />
 
     <!-- Thời gian -->
     <TextView
@@ -22,18 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="08:00 - 09:00"
-        android:textSize="14sp"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginTop="4dp" />
-
-    <!-- Ghi chú -->
-    <TextView
-        android:id="@+id/tvNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ghi chú sự kiện"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="4dp" />
+        android:textSize="12sp"
+        android:textColor="#444444"
+        android:layout_marginTop="2dp" />
 
 </LinearLayout>
